@@ -40,7 +40,7 @@ func TestSearchHandler_HandleSearch(t *testing.T) {
 				m := mock_search.NewMockSearcher(ctrl)
 				m.EXPECT().
 					Search(uint64(1)).
-					Return(uint64(0), search.ErrNumberNotFound)
+					Return(int(0), search.ErrNumberNotFound)
 
 				return m
 			},
@@ -56,7 +56,7 @@ func TestSearchHandler_HandleSearch(t *testing.T) {
 				m := mock_search.NewMockSearcher(ctrl)
 				m.EXPECT().
 					Search(uint64(100)).
-					Return(uint64(0), nil)
+					Return(int(0), nil)
 
 				return m
 			},

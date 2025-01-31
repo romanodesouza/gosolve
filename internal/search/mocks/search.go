@@ -40,10 +40,10 @@ func (m *MockSearcher) EXPECT() *MockSearcherMockRecorder {
 }
 
 // Search mocks base method.
-func (m *MockSearcher) Search(n uint64) (uint64, error) {
+func (m *MockSearcher) Search(n uint64) (int, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", n)
-	ret0, _ := ret[0].(uint64)
+	ret0, _ := ret[0].(int)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

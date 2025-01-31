@@ -60,6 +60,7 @@ func main() {
 		logger.Error("could not read input file", slog.Any("err", err), slog.String("file", filePath))
 		return
 	}
+	defer f.Close()
 	idx, err := search.NewIndex(f, *logger)
 	if err != nil {
 		logger.Error("could not ingest input file", slog.Any("err", err))
@@ -80,8 +81,9 @@ func main() {
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
 	go func() {
+		logger.Info("starting web server", slog.String("service_port", addr))
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			logger.Info("starting web server", slog.String("service_port", addr))
+			logger.Error("server could not be started", slog.Any("err", err))
 		}
 	}()
 	<-done

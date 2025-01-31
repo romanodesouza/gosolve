@@ -63,7 +63,7 @@ func (h SearchHandler) HandleSearch(w http.ResponseWriter, req *http.Request) {
 	// Happy response
 	w.WriteHeader(http.StatusOK)
 	err = json.NewEncoder(w).Encode(SearchResponse{
-		Index:        &[]uint64{index}[0],
+		Index:        &[]int{index}[0],
 		ErrorMessage: nil,
 	})
 	if err != nil {
@@ -72,6 +72,6 @@ func (h SearchHandler) HandleSearch(w http.ResponseWriter, req *http.Request) {
 }
 
 type SearchResponse struct {
-	Index        *uint64 `json:"index"`
+	Index        *int    `json:"index"`
 	ErrorMessage *string `json:"errorMessage"`
 }

@@ -4,4 +4,8 @@ run:
 mocks:
 	go install go.uber.org/mock/mockgen@latest
 	mockgen -source=internal/search/search.go -destination=internal/search/mocks/search.go
-.PHONY: run
+
+test:
+	go test -v ./...
+
+.PHONY: run mocks test
