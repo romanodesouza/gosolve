@@ -68,7 +68,7 @@ func main() {
 
 	// Set up web server
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /search/{n}", api.NewSearchHandler(*logger, idx).HandleSearch)
+	api.NewSearchHandler(*logger, idx).AssignRoutes(mux)
 
 	addr := fmt.Sprintf(":%s", viper.GetString("SERVICE_PORT"))
 	srv := &http.Server{
